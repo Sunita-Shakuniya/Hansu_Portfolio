@@ -10,7 +10,8 @@
   <link
     href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap"
     rel="stylesheet">
-  <style>
+  
+     <style>
     /* =============================================
    ROOT — PURPLE/VIOLET BANNER THEME
    ============================================= */
@@ -766,37 +767,269 @@
       border-color: transparent;
     }
 
+    /* ── GRID BASE ── */
     .portfolio-grid {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
-      gap: 2px;
+      gap: 3px;
     }
 
     .port-item {
       background: var(--bg3);
       overflow: hidden;
       position: relative;
-      aspect-ratio: 1;
       border-radius: 2px;
     }
 
-    .port-item.wide {
-      grid-column: span 8;
-      aspect-ratio: 17/12;
+    .port-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.4s;
+      filter: brightness(0.82) saturate(1.1);
     }
 
-    .port-item.tall {
-      grid-column: span 4;
-      grid-row: span 1;
-      aspect-ratio: auto;
+    .port-item:hover .port-img {
+      transform: scale(1.06);
+      filter: brightness(1) saturate(1.2);
     }
 
-    .port-item.med {
-      grid-column: span 4;
+    .port-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(14, 12, 48, 0.92) 0%, rgba(14, 12, 48, 0.2) 50%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.2rem;
+      opacity: 0;
+      transition: opacity 0.35s;
     }
 
-    .port-item.small {
-      grid-column: span 4;
+    .port-item:hover .port-overlay {
+      opacity: 1;
+    }
+
+    .port-cat {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.25rem;
+    }
+
+    .port-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1rem;
+      color: var(--white);
+      font-weight: 400;
+    }
+
+    .port-note {
+      text-align: center;
+      margin-top: 1.8rem;
+      font-size: 0.78rem;
+      color: var(--dim);
+      font-family: 'Syne', sans-serif;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── DESKTOP: default layout via inline styles in HTML ── */
+    /* Each item already has grid-column + aspect-ratio inline — no extra rules needed here */
+
+    /* ── TABLET: 769px – 1024px ── */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .portfolio-grid {
+        grid-template-columns: repeat(12, 1fr);
+        gap: 3px;
+      }
+
+      /* Item 1: wedding — 7 cols */
+      .port-item:nth-child(1) {
+        grid-column: span 7 !important;
+        grid-row: span 1 !important;
+        aspect-ratio: 3/2 !important;
+      }
+
+      /* Item 2: Focus — 5 cols, spans 2 rows */
+      .port-item:nth-child(2) {
+        grid-column: span 5 !important;
+        grid-row: span 2 !important;
+        aspect-ratio: 9/12.7 !important;
+      }
+
+      /* Item 3: logo — 7 cols */
+      .port-item:nth-child(3) {
+        grid-column: span 7 !important;
+        grid-row: span 1 !important;
+        aspect-ratio: 16/9 !important;
+      }
+
+      /* Items 4-7: 3 cols each */
+      .port-item:nth-child(4),
+      .port-item:nth-child(5),
+      .port-item:nth-child(6),
+      .port-item:nth-child(7) {
+        grid-column: span 3 !important;
+        grid-row: span 1 !important;
+        aspect-ratio: 4/5 !important;
+      }
+
+      /* Items 8-10: 4 cols each */
+      .port-item:nth-child(8),
+      .port-item:nth-child(9),
+      .port-item:nth-child(10) {
+        grid-column: span 4 !important;
+        grid-row: span 1 !important;
+        aspect-ratio: 4/5 !important;
+      }
+
+      .port-overlay {
+        opacity: 1;
+        background: linear-gradient(to top, rgba(14, 12, 48, 0.85) 0%, transparent 55%);
+      }
+    }
+
+    /* ── MOBILE: max 768px ── */
+    @media (max-width: 768px) {
+      .portfolio-section {
+        padding: 4rem 0;
+      }
+
+      .portfolio-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .filter-tabs {
+        gap: 0.25rem;
+      }
+
+      .filter-btn {
+        font-size: 0.65rem;
+        padding: 0.38rem 0.75rem;
+      }
+
+      .portfolio-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 3px;
+      }
+
+      /* Item 1: wedding — full width */
+      .port-item:nth-child(1) {
+        grid-column: span 2 !important;
+        grid-row: span 1 !important;
+        aspect-ratio: 3/2 !important;
+      }
+
+      /* Item 2: Focus — full width portrait */
+      .port-item:nth-child(2) {
+        grid-column: span 2 !important;
+        grid-row: span 1 !important;
+        aspect-ratio: 4/3 !important;
+      }
+
+      /* Item 3: logo — full width */
+      .port-item:nth-child(3) {
+        grid-column: span 2 !important;
+        grid-row: span 1 !important;
+        aspect-ratio: 16/9 !important;
+      }
+
+      /* Items 4-9: half width portrait pairs */
+      .port-item:nth-child(4),
+      .port-item:nth-child(5),
+      .port-item:nth-child(6),
+      .port-item:nth-child(7),
+      .port-item:nth-child(8),
+      .port-item:nth-child(9) {
+        grid-column: span 1 !important;
+        grid-row: span 1 !important;
+        aspect-ratio: 4/5 !important;
+      }
+
+      /* Item 10: last reel — full width to balance */
+      .port-item:nth-child(10) {
+        grid-column: span 2 !important;
+        grid-row: span 1 !important;
+        aspect-ratio: 16/9 !important;
+      }
+
+      /* Always show overlays — no hover on touch */
+      .port-overlay {
+        opacity: 1;
+        background: linear-gradient(to top, rgba(14, 12, 48, 0.85) 0%, transparent 55%);
+      }
+
+      .port-item:hover .port-img {
+        transform: scale(1);
+      }
+    }
+
+    /* ── SMALL MOBILE: max 480px ── */
+    @media (max-width: 480px) {
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: 3px;
+      }
+
+      .port-item:nth-child(1) {
+        grid-column: span 1 !important;
+        aspect-ratio: 3/2 !important;
+      }
+
+      .port-item:nth-child(2) {
+        grid-column: span 1 !important;
+        aspect-ratio: 4/3 !important;
+      }
+
+      .port-item:nth-child(3) {
+        grid-column: span 1 !important;
+        aspect-ratio: 16/9 !important;
+      }
+
+      .port-item:nth-child(4),
+      .port-item:nth-child(5),
+      .port-item:nth-child(6),
+      .port-item:nth-child(7),
+      .port-item:nth-child(8),
+      .port-item:nth-child(9),
+      .port-item:nth-child(10) {
+        grid-column: span 1 !important;
+        aspect-ratio: 4/5 !important;
+      }
+    }
+
+    /* Landscape images get a slightly shorter height on tiny screens */
+    [data-cat="wedding"]:nth-child(1) {
+      aspect-ratio: 3/2;
+    }
+
+    [data-cat="logo"]:nth-child(3) {
+      aspect-ratio: 16/9;
+    }
+
+    /* Focus keeps its portrait ratio */
+    [data-cat="social"]:nth-child(2) {
+      aspect-ratio: 9/12.7;
+    }
+
+    /* All portrait items */
+    [data-cat="social"]:nth-child(4),
+    [data-cat="social"]:nth-child(5),
+    [data-cat="poster"]:nth-child(6),
+    [data-cat="poster"]:nth-child(7),
+    [data-cat="poster"]:nth-child(8),
+    [data-cat="reel"]:nth-child(9),
+    [data-cat="reel"]:nth-child(10) {
+      aspect-ratio: 4/5;
+    }
     }
 
     .port-img {
@@ -841,10 +1074,6 @@
       opacity: 0.35;
     }
 
-    .port-item:hover .port-img {
-      transform: scale(1.06);
-      filter: brightness(1) saturate(1.2);
-    }
 
     .port-item:hover .port-placeholder {
       background: var(--bg4);
@@ -1213,6 +1442,44 @@
     /* ===========================================
    MOBILE — max 768px
    =========================================== */
+    /* ── MOBILE: max 768px — portfolio ── */
+    @media (max-width: 768px) {
+
+      .portfolio-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+      }
+
+      /* Reset ALL inline grid-column / grid-row / aspect-ratio */
+      .portfolio-grid .port-item {
+        grid-column: unset !important;
+        grid-row: unset !important;
+        aspect-ratio: unset !important;
+        width: 100% !important;
+        border-radius: 6px;
+      }
+
+      /* Let each image show its real height — no cropping */
+      .portfolio-grid .port-item .port-img {
+        width: 100% !important;
+        height: auto !important;
+        object-fit: unset !important;
+        display: block !important;
+      }
+
+      /* Keep overlay always visible on touch */
+      .port-overlay {
+        opacity: 1 !important;
+        background: linear-gradient(to top, rgba(14, 12, 48, 0.85) 0%, transparent 50%);
+      }
+
+      /* No zoom on tap */
+      .port-item:hover .port-img {
+        transform: none !important;
+      }
+    }
+
     @media(max-width:768px) {
 
       /* Nav */
@@ -1350,25 +1617,6 @@
         gap: 2px;
       }
 
-      .port-item.wide {
-        grid-column: span 2;
-        aspect-ratio: 4/3;
-      }
-
-      .port-item.tall {
-        grid-column: span 1;
-        grid-row: span 1;
-        aspect-ratio: 1;
-      }
-
-      .port-item.med {
-        grid-column: span 1;
-      }
-
-      .port-item.small {
-        grid-column: span 1;
-      }
-
       /* Always show overlays on mobile */
       .port-overlay {
         opacity: 1;
@@ -1449,42 +1697,8 @@
         gap: 3rem;
       }
 
-      .services-grid {
-        grid-template-columns: 1fr 1fr;
-      }
 
-      .portfolio-grid {
-        grid-template-columns: repeat(8, 1fr);
-      }
 
-      .port-item.wide {
-        grid-column: span 8;
-      }
-
-      .port-item.tall {
-        grid-column: span 4;
-      }
-
-      .port-item.med {
-        grid-column: span 4;
-      }
-
-      .port-item.small {
-        grid-column: span 4;
-      }
-
-      .process-steps {
-        grid-template-columns: 1fr 1fr;
-        gap: 2.5rem;
-      }
-
-      .process-steps::before {
-        display: none;
-      }
-
-      .testi-grid {
-        grid-template-columns: 1fr 1fr;
-      }
     }
   </style>
 </head>
